@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+        .error {
+            color: red;
+        }
+        .success {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <h1>Maritime Vessel Management System API Test</h1>
+    
+    <div>
+        <button id="testHome">Test Home Endpoint</button>
+        <button id="testVessels">Test Vessels API</button>
+        <button id="testCrew">Test Crew API</button>
+        <button id="testVoyages">Test Voyages API</button>
+        <button id="testMaintenance">Test Maintenance API</button>
+    </div>
+    
+    <h2>Results:</h2>
+    <pre id="results">Click a button to test an API endpoint...</pre>
+    
+    <script>
+        const resultsElement = document.getElementById('results');
+        const API_BASE_URL = 'http://localhost:5000';
+        
+        // Function to display results
+        function displayResults(data, error = false) {
+            resultsElement.innerHTML = error 
+                ? `<span class="error">${JSON.stringify(data, null, 2)}</span>` 
+                : `<span class="success">${JSON.stringify(data, null, 2)}</span>`;
+        }
+        
+        // Function to make API requests
+        async function makeRequest(endpoint) {
+            resultsElement.innerHTML = `Fetching ${endpoint}...`;
+            
+            try {
+                console.log(`Fetching ${API_BASE_URL}${endpoint}...`);
+                
+                const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                console.log('Response status:', response.status);
+                console.log('Response headers:', Object.fromEntries([...response.headers.entries()]));
+                
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    console.error('Error response:', errorText);
+                    throw new Error(`Request failed: ${response.status} ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                console.log('Data received:', data);
+                displayResults(data);
+                return data;
+            } catch (error) {
+                console.error('Error making request:', error);
+                displayResults({ error: error.message }, true);
+                throw error;
+            }
+        }
+        
+        // Event listeners for buttons
+        document.getElementById('testHome').addEventListener('click', () => makeRequest('/'));
+        document.getElementById('testVessels').addEventListener('click', () => makeRequest('/api/vessels'));
+        document.getElementById('testCrew').addEventListener('click', () => makeRequest('/api/crew'));
+        document.getElementById('testVoyages').addEventListener('click', () => makeRequest('/api/voyages'));
+        document.getElementById('testMaintenance').addEventListener('click', () => makeRequest('/api/maintenance'));
+    </script>
+</body>
+</html>
