@@ -1,136 +1,100 @@
-# Maritime Vessel Management System (MVMS)
+Maritime Vessel Management System (MVMS) Documentation
+1. Introduction
+The Maritime Vessel Management System (MVMS) is a comprehensive software solution designed to streamline the management of vessels, crew, voyages, and maintenance operations in the maritime industry. This system enhances operational efficiency, ensures regulatory compliance, and improves real-time tracking and decision-making for maritime enterprises.
+MVMS provides an integrated platform with:
+•	Vessel Management: Centralized tracking of vessel specifications, locations, and statuses.
+•	Crew Management: Efficient handling of crew records, certifications, and assignments.
+•	Voyage Planning & Tracking: Real-time voyage monitoring with route visualization.
+•	Maintenance Scheduling: Automated maintenance tracking and inventory management.
+Built with modern technologies, MVMS ensures scalability, security, and a seamless user experience.
 
-A comprehensive solution for managing vessels, crew, voyages and maintenance in the maritime industry. This application helps shipping companies track vessels, crew, maintenance schedules, and voyage data.
+3. Problem Analysis
+Current Challenges in Maritime Management
+1.	Manual and Disjointed Systems: Many maritime companies rely on spreadsheets and paper-based records, leading to inefficiencies and errors.
+2.	Lack of Real-Time Tracking: Difficulty in monitoring vessel locations, voyage progress, and crew assignments in real time.
+3.	Maintenance Delays: Unplanned downtime due to poor maintenance scheduling and tracking.
+4.	Regulatory Compliance Risks: Difficulty in maintaining up-to-date crew certifications and vessel documentation.
+5.	Data Security & Integration Issues: Siloes systems make data sharing and security management challenging.
 
-## Features
+Solution Proposed by MVMS
+MVMS addresses these challenges by providing:
+✔ Automated workflows for vessel, crew, and voyage management.
+✔ Real-time tracking via interactive maps (Leaflet.js).
+✔ Automated maintenance alerts to prevent unexpected breakdowns.
+✔ Centralized database (MongoDB) for secure and scalable data storage.
+✔ RESTful API for seamless integration with third-party maritime systems.
 
-- **Vessel Management**: Register and track vessels with detailed information including specifications, current location, and status
-- **Crew Management**: Manage crew members, their certifications, assignments, and contract details
-- **Voyage Tracking**: Plan and monitor voyages with route tracking, cargo information, and status updates
-- **Maintenance Scheduling**: Schedule and track vessel maintenance activities, assign technicians, and manage parts inventory
+3. System Objectives
+3.1. Main Objectives
+•	Provide a unified platform for maritime vessel and crew management.
+•	Enhance operational efficiency through automation and real-time tracking.
+•	Ensure compliance with maritime regulations.
+•	Improve maintenance planning to reduce downtime.
+3.2. Specific Objectives
+•	Vessel Management: Track vessel details (specifications, location, status).
+•	Crew Management: Manage crew profiles, certifications, and contracts.
+•	Voyage Tracking: Monitor voyages with route visualization and cargo details.
+•	Maintenance Scheduling: Automate maintenance logs and inventory tracking.
+•	Reporting & Analytics: Generate compliance reports and operational insights.
 
-## Technology Stack
+4. System Scope
+4.1. In-Scope Features
+✅ Vessel Management Module
+•	Vessel registration & specifications
+•	Real-time location tracking (Leaflet maps)
+•	Status updates (operational, maintenance, docked)
+✅ Crew Management Module
+•	Crew profiles & certifications
+•	Assignment scheduling
+•	Contract & payroll tracking
+✅ Voyage Management Module
+•	Voyage planning & route mapping
+•	Cargo & logistics tracking
+•	Estimated time of arrival (ETA) updates
+✅ Maintenance Module
+•	Scheduled & unscheduled maintenance logs
+•	Technician assignments
+4.2. Out-of-Scope Features
+❌ Fuel Consumption Analytics (Future Phase)
+❌ AI-Based Predictive Maintenance (Future Phase)
+❌ Integration with Port Authorities (Customizable per client)
 
-- **Frontend**: React.js with TypeScript, TailwindCSS, React Router, Leaflet for maps
-- **Backend**: Node.js with Express and TypeScript
-- **Database**: MongoDB with Mongoose ODM
-- **API**: RESTful API architecture
+5. System Features & Design
+5.1. Key Features
+Vessel Management
+•	Add/edit vessel details (IMO number, type, capacity).
+•	Live location tracking via GPS and Leaflet maps.
+•	Status indicators (active, maintenance, inactive).
+Crew Management
+•	Crew database with personal & professional details.
+•	Certification expiry alerts.
+•	Assignment history and contract management.
+Voyage Tracking
+•	Interactive voyage planner with waypoints.
+•	Cargo manifest & voyage logs.
+•	Real-time ETA updates.
+Maintenance Scheduling
+•	Automated maintenance reminders.
+•	Work order generation.
+•	Spare parts inventory tracking.
 
-## Getting Started
+5.2. System Architecture
+Frontend
+•	React.js with TypeScript: For type-safe, scalable UI.
+•	TailwindCSS: Responsive and customizable styling.
+•	React Router: Seamless navigation.
+•	Leaflet.js: Interactive voyage mapping.
+Backend
+•	Node.js with Express & TypeScript: Robust API development.
+•	MongoDB with Mongoose ODM: Flexible NoSQL database.
+•	RESTful API: Standardized communication between frontend & backend.
 
-### Prerequisites
+7. Technology Stack
+Category	Technologies
+Frontend	React.js, TypeScript, TailwindCSS, Leaflet, React Router
+Backend	Node.js, Express, TypeScript
+Database	MongoDB, Mongoose ODM
+API	RESTful API
+8. Conclusion
+The Maritime Vessel Management System (MVMS) is a modern, scalable solution designed to optimize maritime operations. By leveraging React.js, Node.js, and MongoDB, MVMS provides real-time tracking, automated workflows, and secure data management.
 
-- Node.js (v14 or higher)
-- MongoDB (local or Atlas)
-
-### Installation
-
-1. Clone the repository
-
-1. Install dependencies:
-
-```bash
-npm install
-```
-
-1. Set up environment variables by creating a `.env` file in the root directory:
-
-```bash
-PORT=5000
-MONGODB_URI=mongodb://localhost:27017/maritime-management
-NODE_ENV=development
-```
-
-### Running the Application
-
-1. Start the backend server:
-
-```bash
-npm run server:dev
-```
-
-1. Start the frontend development server:
-
-```bash
-npm run dev
-```
-
-1. Or run both concurrently:
-
-```bash
-npm start
-```
-
-1. Access the application at `http://localhost:5173`
-
-## API Endpoints
-
-### Vessels
-
-- `GET /api/vessels` - Get all vessels
-- `GET /api/vessels/:id` - Get vessel by ID
-- `POST /api/vessels` - Create a new vessel
-- `PUT /api/vessels/:id` - Update vessel
-- `DELETE /api/vessels/:id` - Delete vessel
-- `PATCH /api/vessels/:id/location` - Update vessel location
-- `GET /api/vessels/status/:status` - Get vessels by status
-
-### Crew
-
-- `GET /api/crew` - Get all crew members
-- `GET /api/crew/:id` - Get crew member by ID
-- `POST /api/crew` - Create a new crew member
-- `PUT /api/crew/:id` - Update crew member
-- `DELETE /api/crew/:id` - Delete crew member
-- `PATCH /api/crew/:id/assign` - Assign crew to vessel
-- `GET /api/crew/vessel/:vesselId` - Get crew by vessel
-- `GET /api/crew/expiring-certifications` - Get crew with expiring certifications
-
-### Voyages
-
-- `GET /api/voyages` - Get all voyages
-- `GET /api/voyages/:id` - Get voyage by ID
-- `POST /api/voyages` - Create a new voyage
-- `PUT /api/voyages/:id` - Update voyage
-- `DELETE /api/voyages/:id` - Delete voyage
-- `PATCH /api/voyages/:id/status` - Update voyage status
-- `POST /api/voyages/:id/route` - Add route point to voyage
-- `GET /api/voyages/vessel/:vesselId` - Get voyages by vessel
-
-### Maintenance
-
-- `GET /api/maintenance` - Get all maintenance records
-- `GET /api/maintenance/:id` - Get maintenance by ID
-- `POST /api/maintenance` - Create a new maintenance record
-- `PUT /api/maintenance/:id` - Update maintenance record
-- `DELETE /api/maintenance/:id` - Delete maintenance record
-- `PATCH /api/maintenance/:id/status` - Update maintenance status
-- `GET /api/maintenance/vessel/:vesselId` - Get maintenance by vessel
-- `GET /api/maintenance/upcoming/scheduled` - Get upcoming maintenance
-
-## Project Structure
-
-```markdown
-maritime-vessel-management-system/
-├── server/                  # Backend server code
-│   ├── config/              # Configuration files
-│   ├── controllers/         # API controllers
-│   ├── models/              # MongoDB models
-│   ├── routes/              # API routes
-│   └── server.ts            # Server entry point
-├── src/                     # Frontend React code
-│   ├── components/          # React components
-│   ├── App.tsx              # Main App component
-│   └── main.tsx             # Entry point
-├── .env                     # Environment variables
-├── package.json             # Project dependencies
-└── README.md                # Project documentation
-```
-
-## Future Enhancements
-
-- User authentication and role-based access control
-- Real-time vessel tracking with WebSockets
-- Advanced reporting and analytics dashboard
-- Mobile application for on-the-go management
-- Integration with weather APIs for voyage planning
